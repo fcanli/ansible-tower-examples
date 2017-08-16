@@ -6,15 +6,18 @@
   
 - name: copy selinux module for nagios 4
   copy: src=nagios-module.pp dest=/tmp/nagios-module.pp
+  when: ansible_selinux.status != "disabled"
 
 - name: install selinux module for nagios 4
   shell: semodule -i /tmp/nagios-module.pp
+  when: ansible_selinux.status != "disabled"
 
 - name: setting up sebool option for correctly starting nagios daemon
   seboolean:
     name: daemons_enable_cluster_mode
     state: yes
     persistent: yes
+  when: ansible_selinux.status != "disabled"
 
 - name: install nagios
   yum: pkg={{ item }} state=present
