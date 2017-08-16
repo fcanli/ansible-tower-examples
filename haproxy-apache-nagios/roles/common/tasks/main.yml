@@ -6,6 +6,9 @@
 - name: Install firewalld
   yum: name=firewalld state=present
   
+- name: Enable and start firewalld
+  service: name=firewalld state=started enabled=yes
+  
 - name: Install python bindings for SE Linux
   yum: name={{ item }} state=present
   with_items:
