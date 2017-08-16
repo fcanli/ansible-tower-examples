@@ -1,6 +1,9 @@
 ---
 # This will install nagios
 
+- name: install selinux tools
+  yum: name=policycoreutils state=present
+  
 - name: copy selinux module for nagios 4
   copy: src=nagios-module.pp dest=/tmp/nagios-module.pp
 
