@@ -3,6 +3,9 @@
 - name: Enable EPEL repo
   yum: name=epel-release state=present
   
+- name: Install firewalld
+  yum: name=firewalld state=present
+  
 - name: Install python bindings for SE Linux
   yum: name={{ item }} state=present
   with_items:
