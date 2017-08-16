@@ -53,6 +53,12 @@
     - webservers.cfg
     - lbservers.cfg
   notify: restart nagios
+  
+- name: add setuid to the ping command
+  file:
+    path: /usr/bin/ping
+    state: file
+    mode: "u=rws,g=rx,o=rx"
 
 - name: start nagios
   service: name=nagios state=started enabled=yes
