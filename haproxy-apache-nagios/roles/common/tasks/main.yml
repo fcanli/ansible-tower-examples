@@ -1,8 +1,10 @@
 ---
 # This role contains common plays that will run on all nodes.
 - name: Enable EPEL repo
-  yum: name=epel-release state=present
-  
+  command: rpm --quiet -i http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  args:
+    creates: /etc/yum.repos.d/epel.repo
+
 - name: Install firewalld
   yum: name=firewalld state=present
   
